@@ -1,0 +1,38 @@
+<div class="container marketing" style="margin: 100px auto 0;">
+
+	<!-- Three columns of text below the carousel -->
+	<div class="row"  ng-repeat="info in infoLists" ng-if="$index % 3 == 0">
+	<div class="col-lg-4" ng-if="infoLists[$index].id != undefined">
+	  <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{infoLists[$index].img}}" alt="{{infoLists[$index].keywords}}" style="width: 160px; height: 160px;">
+	  <h3>{{infoLists[$index].title}}</h3>
+	  <p>{{infoLists[$index].description | limitTo:100}}</p>
+	  <p><!-- <a class="btn btn-default" href="#/navbar/foodDetail/{{foodLists[$index].id}}" role="button">查看详情 &raquo;</a> -->
+		<a class="btn btn-info" ui-sref="Navbar.infoDetail({id:infoLists[$index].id})" role="button">查看详情 &raquo;</a>
+	  </p>
+	</div><!-- /.col-lg-4 -->
+
+	<div class="col-lg-4" ng-if="infoLists[$index+1].id != undefined">
+	  <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{infoLists[$index+1].img}}" alt="{{infoLists[$index+1].keywords}}" style="width: 160px; height: 160px;">
+	  <h3>{{infoLists[$index+1].title}}</h3>
+	  <p>{{infoLists[$index+1].description  | limitTo:100}}</p>
+	  <p><a class="btn btn-info" href="#/Navbar/infoDetail/{{infoLists[$index+1].id}}" role="button">查看详情 &raquo;</a></p>
+	</div><!-- /.col-lg-4 -->
+
+
+	<div class="col-lg-4"  ng-if="infoLists[$index+2].id != undefined">
+	  <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{infoLists[$index+2].img}}" alt="{{infoLists[$index+2].keywords}}" style="width: 160px; height: 160px;">
+	  <h3>{{infoLists[$index+2].title}}</h3>
+	  <p>{{infoLists[$index+2].description  | limitTo:100}}</p>
+	  <p><a class="btn btn-info" href="#/Navbar/infoDetail/{{infoLists[$index+2].id}}" role="button">查看详情 &raquo;</a></p>
+	</div><!-- /.col-lg-4 -->
+
+	</div><!-- /.row -->
+
+	<nav>
+	  <ul class="pagination">
+	    <!-- <li ng-repeat="n in [] | range:foodListsPageCount"><a href="#/navbar/foodList/{{foodCateID}}/{{n}}">{{n}}</a></li> -->
+	   	<li ng-repeat="p in infopageCountList"><a href="#/Navbar/infoList/{{infoCateID}}/{{p}}">{{p}}</a></li>
+	  </ul>
+	</nav>
+
+</div>

@@ -1,0 +1,41 @@
+ <!-- <div class="navbar-wrapper" > -->
+<!-- 每三个数据一循环 -->
+<div class="container marketing" style="margin:100px auto 0;">
+
+ <div class="row"  ng-repeat="kl in knowledgeList" ng-if="$index % 3 == 0" style="text-align:center">
+  <div class="col-lg-4" ng-if="knowledgeList[$index].id != undefined" style="text-align:center">
+    <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{knowledgeList[$index].img}}" alt="{{knowledgeList[$index].keywords}}" style="width:140px;height:140px;">
+    <h4 style="text-align:center">{{knowledgeList[$index].title|limitTo:10}}</h4>
+    <p>{{knowledgeList[$index].keywords}}</p>
+    <p style="text-align:left">{{knowledgeList[$index].description|limitTo:100}}</p>
+    <p style="text-align:right;">{{date(knowledgeList[$index].time)}}</p>
+    <p><a class="btn btn-default" href="#/Navbar/knowledgeDetail/{{knowledgeList[$index].id}}" role="button">查看详情 &raquo;</a></p>
+  </div>
+  <div class="col-lg-4" ng-if="knowledgeList[$index+1].id != undefined">
+    <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{knowledgeList[$index+1].img}}" alt="{{knowledgeList[$index].keywords}}" style="width:140px;height:140px;">
+    <h4>{{knowledgeList[$index+1].title}}</h4>
+    <p>{{knowledgeList[$index+1].keywords}}</p>
+    <p>{{knowledgeList[$index+1].description}}</p>
+    <p style="text-align:right;">{{date(knowledgeList[$index+1].time)}}</p>
+    <p><a class="btn btn-default" href="#/Navbar/knowledgeDetail/{{knowledgeList[$index+1].id}}" role="button">查看详情 &raquo;</a></p>
+   </div>
+   <div class="col-lg-4" ng-if="knowledgeList[$index+1].id !=undefined">
+    <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{knowledgeList[$index+2].img}}" alt="{{knowledgeList[$index].keywords}}" style="width:140px;height:140px;">
+    <h4>{{knowledgeList[$index+2].title}}</h4>
+    <p>{{knowledgeList[$index+2].keywords}}</p>
+    <p>{{knowledgeList[$index+2].description}}</p>
+    <p style="text-align:right;">{{date(knowledgeList[$index+2].time)}}</p>
+    <p><a class="btn btn-default" href="#/Navbar/knowledgeDetail/{{knowledgeList[$index+2].id}}" role="button">查看详情 &raquo;</a></p>
+    </div>
+ </div>
+ 
+ 
+ 
+ 
+ <nav>
+  <ul class="pagination">
+   <li ng-repeat="n in [] | range:knowledgeListPageCount"><a href="#/Navbar/knowledgeList/{{knowledgeCateID}}/{{n}}">{{n}}</a></li> 
+    <li ng-repeat="page in pageCountList"><a href="#/Navbar/knowledgeList/{{knowledgeCateID}}/{{page}}">{{page}}</a></li>
+  </ul>
+ </nav>
+ </div> 

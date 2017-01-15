@@ -1,0 +1,24 @@
+
+
+<div class="container marketing" style="padding:20px;">
+
+	<div class="row featurette">
+		<div class="col-md-5">
+	      <img class="featurette-image img-responsive" ng-src="{{foodPrefix}}{{detail.img}}" alt="{{detail.keywords}}">
+	    </div>
+	    <div class="col-md-7">
+	      <h2 class="featurette-heading">{{detail.name}} <span class="text-muted">{{detail.food}}</span></h2>
+	      <p class="lead">{{detail.description}}</p>
+	    
+
+	      <p class="lead" compile="detail.message"></p>
+	    
+
+			<a href="javascript:void(0)"  ng-click="back('foodDetailGoBack')" id="foodDetailGoBack" tabindex="0" 
+			class="btn btn-lg btn-danger" 
+			role="button" data-toggle="popover" data-trigger="focus" title="返回前页" data-content="你在当前页面进行了直接刷新，找不到回去的路了！" style="background:gray;border-color:gray">返回前页</a>
+
+	    </div>
+	</div>
+
+</div>

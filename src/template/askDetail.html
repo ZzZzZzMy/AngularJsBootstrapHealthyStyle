@@ -1,0 +1,19 @@
+<div class="container marketing" style="margin-top:100px;">
+<div class="blog-post">
+            <h2 class="blog-post-title">{{getDetailDatas.title}}</h2>
+            
+            <p class="blog-post-meta">{{getDetailDatas.keywords}}</p>
+
+            <p>{{getDetailDatas.description}}</p>
+            <hr>
+            <img ng-src="{{foodPrefix}}{{getDetailDatas.img}}" alt="" />
+            <blockquote>
+              <p ng-bind-html="getconent" ></p>
+            </blockquote>
+          </div>
+
+           <a href="javascript:void(0)"  ng-click="back('foodDetailGoBack')" id="foodDetailGoBack" tabindex="0" 
+			class="btn btn-lg btn-danger" 
+			role="button" data-toggle="popover" data-trigger="focus" title="返回前页" data-content="你在当前页面进行了直接刷新，找不到回去的路了！">返回前页</a>
+          </div>
+         

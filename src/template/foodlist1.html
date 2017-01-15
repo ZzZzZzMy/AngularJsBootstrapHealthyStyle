@@ -1,0 +1,45 @@
+
+
+  <div class="container marketing" style="margin:100px auto 0">
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row"  ng-repeat="food in foodlist" ng-if="$index % 3 == 0">
+  <div class="col-lg-4" ng-if="foodlist[$index].id != undefined">
+    <img class="img-circle" ng-src="{{foodPrefix}}{{foodlist[$index].img}}" alt="{{foodlist[$index].keywords}}" style="width: 140px; height: 140px;">
+    <h2>{{foodlist[$index].name}}</h2>
+    <p>{{foodlist[$index].description | limitTo:100}}</p>
+    <p><!-- <a class="btn btn-default" href="#/navbar/foodDetail/{{foodLists[$index].id}}" role="button">查看详情 &raquo;</a> -->
+<a class="btn btn-default" ui-sref="Navbar.fooddetail1({id:foodlist[$index].id})" role="button">查看详情 &raquo;</a>
+    </p>
+  </div><!-- /.col-lg-4 -->
+
+  <div class="col-lg-4" ng-if="foodlist[$index+1].id != undefined">
+    <img class="img-circle" ng-src="{{foodPrefix}}{{foodlist[$index+1].img}}" alt="{{foodlist[$index+1].keywords}}" style="width: 140px; height: 140px;">
+    <h2>{{foodlist[$index+1].name}}</h2>
+    <p>{{foodlist[$index+1].description  | limitTo:100}}</p>
+    <p><a class="btn btn-default" href="#/Navbar/fooddetail1/{{foodlist[$index+1].id}}" role="button">查看详情 &raquo;</a></p>
+  </div><!-- /.col-lg-4 -->
+
+
+  <div class="col-lg-4"  ng-if="foodlist[$index+2].id != undefined">
+    <img class="img-circle" ng-src="{{foodPrefix}}{{foodlist[$index+2].img}}" alt="{{foodlist[$index+2].keywords}}" style="width: 140px; height: 140px;">
+    <h2>{{foodlist[$index+2].name}}</h2>
+    <p>{{foodlist[$index+2].description  | limitTo:100}}</p>
+    <p><a class="btn btn-default" href="#/Navbar/fooddetail1/{{foodlist[$index+2].id}}" role="button">查看详情 &raquo;</a></p>
+  </div><!-- /.col-lg-4 -->
+
+
+
+  </div><!-- /.row -->
+
+  <nav>
+    <ul class="pagination">
+      <!-- <li ng-repeat="n in [] | range:foodListsPageCount"><a href="#/navbar/foodList/{{foodCateID}}/{{n}}">{{n}}</a></li> -->
+      <li ng-repeat="p in pageCountList"><a href="#/Navbar/foodlist1/{{foodCateID}}/{{p}}">{{p}}</a></li>
+    </ul>
+  </nav>
+
+  <nav>
+
+</div>
+

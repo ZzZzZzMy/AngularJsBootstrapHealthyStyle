@@ -1,0 +1,40 @@
+ <div class="container marketing" style="margin:100px auto 0">
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row"  ng-repeat="modecine in modecinelist" ng-if="$index % 3 == 0">
+  <div class="col-lg-4" ng-if="modecinelist[$index].id != undefined">
+    <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{modecinelist[$index].img}}" alt="{{modecinelist[$index].keywords}}" style="width: 140px; height: 140px;">
+    <h3>{{modecinelist[$index].name}}</h3>
+    <p>{{modecinelist[$index].business | limitTo:100}}</p>
+    <p><!-- <a class="btn btn-default" href="#/navbar/foodDetail/{{foodLists[$index].id}}" role="button">查看详情 &raquo;</a> -->
+<a class="btn btn-default" ui-sref="Navbar.modecinedetail({id:modecinelist[$index].id})" role="button">查看详情 &raquo;</a>
+    </p>
+  </div><!-- /.col-lg-4 -->
+
+  <div class="col-lg-4" ng-if="modecinelist[$index].id != undefined">
+    <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{modecinelist[$index+1].img}}" alt="{{modecinelist[$index].keywords}}" style="width: 140px; height: 140px;">
+    <h3>{{modecinelist[$index].name}}</h3>
+    <p>{{modecinelist[$index].business | limitTo:100}}</p>
+    <p><!-- <a class="btn btn-default" href="#/navbar/foodDetail/{{foodLists[$index].id}}" role="button">查看详情 &raquo;</a> -->
+<a class="btn btn-default" ui-sref="Navbar.modecinedetail({id:modecinelist[$index].id})" role="button">查看详情 &raquo;</a>
+    </p>
+  </div><!-- /.col-lg-4 -->
+
+
+   <div class="col-lg-4" ng-if="modecinelist[$index].id != undefined">
+    <img class="img-circle" ng-src="http://tnfs.tngou.net/image/{{modecinelist[$index+2].img}}" alt="{{modecinelist[$index].keywords}}" style="width: 140px; height: 140px;">
+    <h3>{{modecinelist[$index].name}}</h3>
+    <p>{{modecinelist[$index].business | limitTo:100}}</p>
+    <p><!-- <a class="btn btn-default" href="#/navbar/foodDetail/{{foodLists[$index].id}}" role="button">查看详情 &raquo;</a> -->
+<a class="btn btn-default" ui-sref="Navbar.modecinedetail({id:modecinelist[$index].id})" role="button">查看详情 &raquo;</a>
+    </p>
+  </div><!-- /.col-lg-4 -->
+
+</div>
+<nav>
+	  <ul class="pagination">
+	    <!-- <li ng-repeat="n in [] | range:foodListsPageCount"><a href="#/navbar/foodList/{{foodCateID}}/{{n}}">{{n}}</a></li> -->
+	   	<li ng-repeat="p in modecineListsPageCount"><a href="#/Navbar/modecinelist/{{modecineCateID}}/{{p}}">{{p}}</a></li>
+	  </ul>
+	</nav>
+</div>

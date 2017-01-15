@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="health">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Angularjs-Bootstrap-HealtytStyle</title>
+   
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="./css/carousel.css" rel="stylesheet">
+    <link href="./css/cover.css" rel="stylesheet">
+    <style>
+      .lead img{
+        width:100%;
+      }
+    </style>
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+  <ui-view></ui-view>
+
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/angular.js"></script>
+    <script type="text/javascript" src="./js/angular-ui-router.js"></script>
+  <script type="text/javascript">
+    var healthApp=angular.module('health',['ui.router'])
+    .run(function($rootScope, $state, $stateParams) {
+        $rootScope.foodPrefix = "http://tnfs.tngou.net/image";
+
+        $rootScope.$state = $state; //state是我们的状态，放到了$rootScope
+        $rootScope.$stateParams = $stateParams; // stateParams是我们的路由的参数
+        // stateChangeSuccess
+        $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
+            // to be used for back button //won't work when page is reloaded.
+            $rootScope.previousState_name = fromState.name; //记录前一个路由的名称
+            $rootScope.previousState_params = fromParams; //记录前一个路由的参数
+        });
+        //back button function called from back button's ng-click="back()"
+        $rootScope.back = function(obj) {
+          //如果前一个路由的名称长度为0，就意味着没有前一个路由操作，我们就没有返回的路径
+          if($rootScope.previousState_name.trim().length != 0){
+            $state.go($rootScope.previousState_name, $rootScope.previousState_params);
+            
+          }else{
+            // alert('没有可返回的页面!');
+            $('#'+obj).popover('show');
+
+          }
+        };
+    })
+    //翻页
+    .filter('range', function() {
+        return function(input, total) {
+          total = parseInt(total);
+          for (var i=1; i<=total; i++) {
+            input.push(i);
+          }
+          return input;
+        };
+      })
+    //配置路由表
+    .config(function($stateProvider,$urlRouterProvider,$urlMatcherFactoryProvider){
+      $urlRouterProvider.otherwise('/Navbar/Home');
+      $urlMatcherFactoryProvider.caseInsensitive(true);
+      $stateProvider
+      //导航页
+      .state('Navbar',{
+        url:'/Navbar',
+        templateUrl:'./template/Navbar.html',
+        controller:'NavbarController'
+      })
+      //Home页
+      .state('Navbar.Home',{
+        url:'/Home',
+        templateUrl:'./template/Home.html',
+        controller:'HomeController'
+      })
+      //食品列表页
+      .state('Navbar.FoodList',{
+        url:'/FoodList/:id/:page',
+        templateUrl:'./template/FoodList.html',
+        controller:'FoodlistController'
+      })
+       //食品详情页
+       .state('Navbar.FoodDetail',{
+        url:'/FoodDetail/:id',
+        templateUrl:'./template/FoodDetail.html',
+        controller:'FoodDetailController'
+      })
+        //健康知识列表页
+      .state('Navbar.knowledgeList',{
+        url:'/knowledgeList/:id/:page',
+        templateUrl:'./template/knowledgeList.html',
+        controller:'knowledgeListController'
+      })
+       //健康知识详情页
+      .state('Navbar.knowledgeDetail',{
+        url:'/knowledgeDetail/:id',
+        templateUrl:'./template/knowledgeDetail.html',
+        controller:'knowledgeDetailController'
+      })
+       //菜谱列表页
+     .state('Navbar.foodlist1', {
+          url: '/foodlist1/:id/:page',
+          templateUrl: './template/foodlist1.html',
+          controller: 'foodlistController'
+      })
+      //菜谱详情页
+      .state('Navbar.fooddetail1', {
+          url: '/fooddetail1/:id',
+          templateUrl: './template/fooddetail1.html',
+          controller: 'fooddetailController'
+      })
+       //药品列表页
+      .state('Navbar.modecinelist',{
+           url: '/modecinelist/:id/:page',
+          templateUrl: './template/modecinelist.html',
+          controller: 'modecinelistController'
+      })
+       //药品详情页
+      .state('Navbar.modecinedetail',{
+           url: '/modecinedetail/:id',
+          templateUrl: './template/modecinedetail.html',
+          controller: 'modecinedetailController'
+      })
+       //健康咨询列表
+     .state('Navbar.infoList', {
+          url: '/infoList/:id/:page',
+          templateUrl: './template/infoList.html',
+          controller: 'infoListController'
+      })
+      //健康咨询详情页
+      .state('Navbar.infoDetail', {
+          url: '/infoDetail/:id',
+          templateUrl: './template/infoDetail.html',
+          controller: 'infoDetailController'
+      })
+       //健康一问列表
+      .state('Navbar.askList',{
+        url:'/askList/:id/:page',
+        templateUrl:'./template/askList.html',
+        controller:'askListController'
+      })
+       //健康一问详情页
+      .state('Navbar.askDetail',{
+        url:'/askDetail/:id',
+        templateUrl:'./template/askDetail.html',
+        controller:'askDetailController'
+      })
+
+    })
+     //去除json数据中的标签
+     .directive("compile", function($compile) {
+        return function(scope,element,attrs){
+          scope.$watch(
+            function(scope){
+              return scope.$eval(attrs.compile);
+            },
+            function(value){
+              element.html(value);
+              $compile(element.contents())(scope);
+            }
+          )
+        }
+      })
+    .controller('NavbarController',function($scope,$http){
+      $http({
+        url:'http://1.1577060863.applinzi.com/mock/test.php'
+      }).then(function(res){
+      	
+      	var result = res.data;
+      	
+        var pos = result.indexOf('<script type="text/javascript">');
+        var getResultData = result.substring(0,pos);
+
+         
+         var Foodname= JSON.parse(getResultData);
+         $scope.Foodlist = Foodname.tngou;
+         
+      });
+       $scope.knowledgecategories={};
+            $http({
+                url:'http://1.836041343.applinzi.com/categories.php'
+            }).then(function(res){
+                var pos=res.data.indexOf('<script type="text/javascript">');
+                var datas=res.data.substring(0,pos);
+                var objDatas=JSON.parse(datas);
+                $scope.knowledgecategories = objDatas.tngou;
+              
+               
+                
+            }) 
+       $http({
+                url: 'http://875081885.applinzi.com/php/food-categories.php'
+            }).then(function(res) {
+                           
+             var result=res.data;
+            var pos=result.indexOf('<script type="text/javascript">');
+            var getresultdata=result.substring(0,pos);            
+            var categoriesdata=JSON.parse(getresultdata);
+            $scope.foodcategories=categoriesdata.tngou;          
+            })
+      $http({
+                url: 'http://2.975488034.applinzi.com/medicine-location.php'
+            }).then(function(res) {
+               
+               
+             var result=res.data;
+            var pos=result.indexOf('<script type="text/javascript">');
+            var getresultdata=result.substring(0,pos);            
+            var categoriesdata=JSON.parse(getresultdata);
+            $scope.modecinecategories=categoriesdata.tngou;
+            })
+       $http({
+                url: 'http://794555801.applinzi.com/php/ItemClassifyAPI.php'
+            }).then(function(res) {
+
+                var result = res.data;
+                var pos = result.indexOf('<script type="text/javascript">');
+                var getResultData = result.substring(0, pos);
+
+               
+                var infoname = JSON.parse(getResultData);
+                $scope.infocategories = infoname.tngou;
+               
+            })
+        $http({
+          url:'http://1.1399972369.applinzi.com/healthcategory.php'
+              }).then(function(res){
+                  var result = res.data;
+           var pos = result.indexOf('<script type="text/javascript">');
+                    var getResultData = result.substring(0,pos);
+                    var ResultData=JSON.parse(getResultData)
+                    $scope.ResultDatas=ResultData.tngou
+      })                        
+
+    })
+    .controller('HomeController',function($scope,$http){
+
+    })
+    
+	.controller("FoodDetailController",function($scope,$http,$stateParams,$sce,$state){
+	    $http({
+	      url:'http://1.1577060863.applinzi.com/mock/detail.php',
+	      params:{
+	        id:$stateParams.id
+	      }
+	    }).then(function(res){
+	    	var result = res.data;
+		   	
+			var pos = result.indexOf('<script type="text/javascript">');
+			var getResultData = result.substring(0,pos);
+			var Detail= JSON.parse(getResultData); 
+	     
+	      $scope.detail = Detail;
+	     
+	      
+	    })
+
+	 })
+   
+    .controller("FoodlistController",function($scope,$http,$stateParams){
+        //初始化参数设置，id为分类的id，page为第几页，rows是每页显示的记录数
+        var rows = 9;
+
+        var params = {
+          id:parseInt($stateParams.id),
+          page:parseInt($stateParams.page),
+          rows:rows
+        }
+              
+       
+        $http({
+          url:'http://1.1577060863.applinzi.com/mock/list.php',
+          params:{
+            id:$stateParams.id,
+            page:$stateParams.page
+          }
+         	
+        }).then(function(res){
+          //返回菜品列表数据
+		   	var result = res.data;
+		   
+			var pos = result.indexOf('<script type="text/javascript">');
+			var getResultData = result.substring(0,pos);
+
+			  // $scope.foodcategorie=getResultData;
+			 var List= JSON.parse(getResultData);  
+
+          $scope.foodLists = List.tngou;
+          //设置分类的Id
+          $scope.foodCateID  =$stateParams.id;
+          //确定分页数,但是foodListsPageCount是一个数值，它不是一个对象，所以我们需要将页面转化为对象，假设一共有12页，[1,2,3,4.....12]
+          var pageCountList = [];
+          for(var i=1;i<=Math.ceil(List.total/rows);i++){
+            pageCountList.push(i);
+          }
+          $scope.foodListsPageCount = pageCountList;
+         
+
+        })
+      })
+     .controller('knowledgeListController',function($scope,$stateParams,$http){
+             //初始化参数设置，id为分类的id，page为第几页，rows是每页显示的记录数
+            var rows = 21;
+            var params = {
+                id:parseInt($stateParams.id),
+                page:parseInt($stateParams.page),
+                rows:rows
+            }
+        
+            $http({
+                url:'http://1.836041343.applinzi.com/list.php',
+                method:'get',
+                params:params
+            }).then(function(res){
+                var pos1=res.data.indexOf('<script type="text/javascript">');
+                var datas1=res.data.substring(0,pos1);
+                var objDatas1=JSON.parse(datas1);
+                //返回菜品列表数据
+                $scope.knowledgeList = objDatas1.tngou;
+
+                 //确定分页数,但是foodListsPageCount是一个数值，它不是一个对象，所以我们需要将页面转化为对象，假设一共有12页，[1,2,3,4.....12]
+                var pageCountList = [];
+                for(var i=1;i<=Math.ceil(objDatas1.total/rows); i++){
+                    pageCountList.push(i);
+                }
+                //设置分类的Id
+                $scope.knowledgeCateID  =$stateParams.id;
+                $scope.id = $stateParams.id;
+                $scope.pageCountList = pageCountList;
+            })
+            function date(time,$scope){
+                   return new Date(time).toLocaleString().replace(/[/]/g, "-");
+                }
+            $scope.date = date;   
+
+        })
+        .controller('knowledgeDetailController',function($scope,$stateParams,$http,$sce){
+            $http({
+                url:'http://1.836041343.applinzi.com/detail.php',
+                params:{
+                    id:$stateParams.id
+                }
+            }).then(function(res){
+                var pos2=res.data.indexOf('<script type="text/javascript">');
+                var datas2=res.data.substring(0,pos2);
+                var objDatas2=JSON.parse(datas2);
+                $scope.Kdetail = objDatas2;
+                $scope.Kdetail.content = $sce.trustAsHtml(objDatas2.message);
+            })
+            function date(time,$scope){
+                return new Date(time).toLocaleString().replace(/[/]/g, "-");
+                }
+            $scope.date = date;   
+
+
+        })
+         .controller('foodlistController', function($scope,$stateParams, $http) {
+    var rows=30;
+       $http({
+            url: 'http://1.875081885.applinzi.com/php/food-list.php',
+            params:{
+              id:$stateParams.id,
+              page:$stateParams.page,
+               rows:rows
+            }
+            }).then(function(res) {
+            var result=res.data;
+            var pos=result.indexOf('<script type="text/javascript">');
+            var getresultdata=result.substring(0,pos);            
+            var food=JSON.parse(getresultdata);
+            $scope.foodlist=food.tngou;
+             
+           $scope.foodCateID  =$stateParams.id;
+             var pageCountList = [];
+             for(var i=1;i<=Math.ceil(food.total/rows);i++){
+            pageCountList.push(i);
+          }
+          $scope.pageCountList = pageCountList;
+            })
+    })
+     .controller('fooddetailController',function($scope,$http,$sce,$stateParams){   
+          $http({
+          url:'http://875081885.applinzi.com/php/food-detail.php',        
+          params:{
+            id:$stateParams.id
+          }
+        }).then(function(res){
+         
+           var result=res.data;
+            var pos=result.indexOf('<script type="text/javascript">');
+            var foodedetal=result.substring(0,pos);            
+            var detail=JSON.parse(foodedetal);
+           $scope.detail=detail;
+       
+        
+        })
+  })       
+   .controller('modecinedetailController',function($scope,$http,$sce,$stateParams){   
+          $http({
+          url:'http://2.975488034.applinzi.com/medicine-show.php',        
+          params:{
+            id:$stateParams.id
+          }
+        }).then(function(res){
+         
+           var result=res.data;
+            var pos=result.indexOf('<script type="text/javascript">');
+            var modecinedetal=result.substring(0,pos);            
+            var Mdetail=JSON.parse(modecinedetal);
+           $scope.Mdetail=Mdetail;
+      
+        
+        })
+  })     
+
+
+
+    .controller('modecinelistController', function($scope,$stateParams, $http) {
+         var rows = 30;
+        var params = {
+          id:parseInt($stateParams.id),
+          page:parseInt($stateParams.page),
+          rows:rows
+        }
+              
+       $http({
+            url: 'http://2.975488034.applinzi.com/medicine-list.php',
+           params:params
+
+            }).then(function(res) {
+            var result=res.data;
+            var pos=result.indexOf('<script type="text/javascript">');
+            var getresultdata=result.substring(0,pos);            
+            var list=JSON.parse(getresultdata);
+            
+            $scope.modecinelist=list.tngou;
+            $scope.modecineCateID  =$stateParams.id;
+             var pageCountList = [];
+             for(var i=1;i<=Math.ceil(list.total/rows);i++){
+            pageCountList.push(i);
+          }
+          $scope.modecineListsPageCount = pageCountList;
+         
+            })
+    })
+     .controller('infoListController', function($scope, $stateParams, $http) {
+        //初始化参数设置，id为分类的id，page为第几页，rows是每页显示的记录数
+          var rows = 30;
+          var params = {
+            id:parseInt($stateParams.id),
+            page:parseInt($stateParams.page),
+            rows:rows
+          }
+
+            $http({
+                url: 'http://794555801.applinzi.com/php/ItemListAPI.php',
+              params:params
+            }).then(function(res) {
+               
+                var result = res.data;
+                var pos = result.indexOf('<script type="text/javascript">');
+                var getResultData = result.substring(0, pos);
+                var infoListName = JSON.parse(getResultData);
+                //返回菜品列表数据
+                $scope.infoLists = infoListName.tngou;
+              
+               
+              //设置分类的Id
+        $scope.infoCateID = $stateParams.id;
+                var pageCountList = [];
+               
+                
+                for (var i = 1; i <= Math.ceil(infoListName.total / rows); i++) {
+                    pageCountList.push(i);
+                }
+                
+               
+                //确定分页数,但是foodListsPageCount是一个数值，它不是一个对象，所以我们需要将页面转化为对象，假设一共有12页，[1,2,3,4.....12]
+                $scope.infopageCountList = pageCountList;
+               
+            })
+        })
+
+    .controller("infoDetailController", function($scope, $http, $stateParams, $sce, $state) {
+        $http({
+            url:'http://794555801.applinzi.com/php/ItemDetailAPI.php',
+            params: {
+                id: $stateParams.id
+            }
+        }).then(function(respones) {
+          
+            var result = respones.data;
+
+            var pos = result.indexOf('<script type="text/javascript">');
+            var getResultData = result.substring(0, pos);
+
+            var infoDetailName = JSON.parse(getResultData);
+           
+            $scope.infoDetail = infoDetailName.tngou;
+            
+
+            $scope.detail = infoDetailName;
+            $scope.detail.content = $sce.trustAsHtml(respones.data.message);
+        })
+
+
+     })
+     .controller('askListController',function($scope,$http,$stateParams){
+      $http({
+          url:'http://1.1399972369.applinzi.com/healthAskList.php',
+          params:{
+            id:$stateParams.id,
+            page:$stateParams.page
+          }
+            })
+      .then(function(res){
+      var askListresult = res.data;
+      var askListpos = askListresult.indexOf('<script type="text/javascript">');
+      var askListResultData = askListresult.substring(0,askListpos);
+      var askResultData=JSON.parse(askListResultData);
+      $scope.askResultDatas=askResultData.tngou;
+      var pageCountList=[];
+      var rows=24;
+      for(var i=1;i<Math.ceil(askResultData.total/rows);i++){
+        pageCountList.push(i);
+      }
+      $scope.id=$stateParams.id;
+      $scope.page=$stateParams.page;
+      $scope.pageCountList=pageCountList
+      })
+      
+    })
+        .controller('askDetailController',function($scope,$http,$stateParams,$sce){
+      $http({
+          url:'http://1.1399972369.applinzi.com/healthDetail.php',
+          params:{
+            id:$stateParams.id
+          }
+              }).then(function(res){
+          var detailresult = res.data;
+          var detailpos = detailresult.indexOf('<script type="text/javascript">');
+                    var getDetailResultData = detailresult.substring(0,detailpos);
+                    var getDetailData=JSON.parse(getDetailResultData)
+                    $scope.getDetailDatas=getDetailData
+                    $scope.getconent = $sce.trustAsHtml(getDetailData.message);
+
+      })
+      
+    })   
+
+  </script>
+   
+  </body>
+</html>

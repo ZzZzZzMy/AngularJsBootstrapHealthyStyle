@@ -1,0 +1,53 @@
+<!-- start header -->
+<div class="container marketing" style="padding:20px; margin:70px auto 0" >
+    <header class="content-wrap" >
+        <div class="container" >
+            <div class="row" >
+                <div class="col-md-8" style="text-align:center">
+                   <h2 >{{Kdetail.title}}</h2> 
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- end header -->
+
+<!-- main start -->       
+          <main class="col-md-8 main-content>
+				<article id="68" class="post" >
+				    <header class="post-head">
+				    	
+				        <h4 class="post-title" >{{Kdetail.keywords}}</h4>
+				        <section class="post-meta" style="text-align:center;">
+				            <time class="post-date" >{{date(Kdetail.time)}}</time>
+				        </section>
+				    </header>
+				    	<section class="post-content">
+						<blockquote>
+						  <p >{{Kdetail.description}}</p>
+						</blockquote>
+						
+						<section class="featured-media " >
+				        	<p class="lead" compile="Kdetail.message"></p>
+				    	</section>
+					</section>
+				</article> 
+				<a href="javascript:void(0)"  ng-click="back('knowledgeDetailGoBack')" id="knowledgeDetailGoBack" tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="返回前页" data-content="你在当前页面进行了直接刷新，找不到回去的路了！" style="display:inline-block;margin-right:0 !important;">
+    	返回前页
+    </a>
+			</main>
+<!-- main end -->
+<!-- start widget -->
+<aside class="col-md-4 sidebar">
+	<div class="widget">
+		<div class="content download">
+			<section class="featured-media" style="margin-top:50px;">
+				<img ng-src="http://tnfs.tngou.net/image/{{Kdetail.img}}" alt="{{Kdetail.keywords}}" style="width:100% !important;">
+			</section>				    
+		</div>
+	</div>
+</aside>
+<!-- end widget -->	
+        </div>
+    </div>
+ </section>
+</div>

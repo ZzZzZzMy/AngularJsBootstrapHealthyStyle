@@ -1,0 +1,27 @@
+<div class="container marketing" style="margin:100px auto 0;">
+<div class="row" ng-repeat="askResultData in askResultDatas" ng-if="$index % 3 == 0">
+        <div class="col-lg-4"  ng-if="askResultDatas[$index].id != undefined">
+          <img class="img-circle" ng-src="{{foodPrefix}}{{askResultDatas[$index].img}}" style="width: 140px; height: 140px;margin-left:85px;">
+          <h2 style="font-size:22px">{{askResultDatas[$index].title}}</h2>
+          <p style="width:360px;height:60px;overflow: hidden;text-overflow: ellipsis;">{{askResultDatas[$index].description}}...</p>
+          <p style="margin-left:90px;"><a class="btn btn-default" ui-sref="Navbar.askDetail({id:askResultDatas[$index].id})" role="button">View details »</a></p>
+        </div>
+        <div class="col-lg-4" ng-if="askResultDatas[$index].id != undefined">
+          <img class="img-circle" ng-src="{{foodPrefix}}{{askResultDatas[$index+1].img}}" style="width: 140px; height: 140px;margin-left:85px;">
+          <h2 style="font-size:22px">{{askResultDatas[$index+1].title}}</h2>
+          <p style="width:360px;height:60px;overflow: hidden;text-overflow: ellipsis;">{{askResultDatas[$index+1].description}}...</p>
+          <p style="margin-left:90px;"><a class="btn btn-default" ui-sref="Navbar.askDetail({id:askResultDatas[$index+1].id})" role="button">View details »</a></p>
+        </div>
+        <div class="col-lg-4" ng-if="askResultDatas[$index].id != undefined">
+          <img class="img-circle" ng-src="{{foodPrefix}}{{askResultDatas[$index+2].img}}" style="width: 140px; height: 140px;margin-left:85px;">
+          <h2 style="font-size:22px">{{askResultDatas[$index+2].title}}</h2>
+          <p style="width:360px;height:60px;overflow: hidden;text-overflow: ellipsis;">{{askResultDatas[$index+2].description}}...</p>
+          <p style="margin-left:90px;"><a class="btn btn-default" ui-sref="Navbar.askDetail({id:askResultDatas[$index+2].id})" role="button">View details »</a></p>
+        </div>
+      </div>
+ <nav>
+ <ul class="pagination">
+    <li ng-repeat="page in pageCountList"><a href="#/Navbar/askList/{{id}}/{{page}}">{{page}}</a></li>
+  </ul>
+</nav>
+</div>
